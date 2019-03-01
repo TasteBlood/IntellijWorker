@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.cloudcreativity.intellijworker.entity.SimpleWorkEntity" />
+    </data>
+    <LinearLayout
+        android:id="@+id/layoutItemWork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center"
+        android:orientation="vertical">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            android:textColor="@color/gray_515151"
+            android:text='@{item.day==null?"":String.valueOf(Integer.parseInt(item.day))}'/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:textColor="@{item.cardNum>0?@color/colorPrimary:@color/gray_a1a1a1}"
+            android:textSize="@dimen/sp12"
+            android:text="@{item.cardNum>0?@string/str_work:@string/str_no_work}"/>
+    </LinearLayout>
+</layout>

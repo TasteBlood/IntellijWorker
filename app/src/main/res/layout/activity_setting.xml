@@ -5,7 +5,7 @@
     <data>
         <variable
             name="setModel"
-            type="com.cloudcreativity.peoplepass.main.SettingModel" />
+            type="com.cloudcreativity.intellijworker.main.SettingModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,9 +39,31 @@
                 android:layout_gravity="end"
                 android:text="@{setModel.cache}"/>
         </FrameLayout>
-
         <View
             android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <FrameLayout
+            android:background="@color/white"
+            android:padding="15dip"
+            android:onClick="@{()->setModel.onEditPwdClick()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp14"
+                android:text="@string/str_edit_pwd"/>
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+        </FrameLayout>
+        <View
+            android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />

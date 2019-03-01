@@ -5,7 +5,7 @@
     <data>
         <variable
             name="registerModel"
-            type="com.cloudcreativity.peoplepass.loginAndRegister.RegisterModel" />
+            type="com.cloudcreativity.intellijworker.loginAndRegister.RegisterModel" />
     </data>
 
     <LinearLayout

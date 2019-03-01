@@ -10,23 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@mipmap/start_index"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:src="@mipmap/bg"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="23sp"
-        android:lineSpacingExtra="5dip"
+        android:text="@string/str_version0"
         android:textColor="@color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="150dip"
-        android:gravity="center"
-        android:text="白银市白银区\n民情信息监督反馈平台"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dip"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:text="All rights reserved by CloudCreativity"/>
+        android:layout_marginBottom="30dip"
+        android:textSize="@dimen/sp18"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

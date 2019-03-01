@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.cloudcreativity.peoplepass"
+        applicationId "com.cloudcreativity.intellijworker"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
@@ -70,4 +70,5 @@ dependencies {
     implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
     implementation 'com.qiniu:qiniu-android-sdk:7.3.10'
     implementation 'com.github.bumptech.glide:glide:4.5.0'
+    implementation project(':calendarview')
 }

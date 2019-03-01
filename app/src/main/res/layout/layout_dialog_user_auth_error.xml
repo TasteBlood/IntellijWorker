@@ -3,7 +3,7 @@
     <data>
         <variable
             name="utils"
-            type="com.cloudcreativity.peoplepass.utils.AuthDialogUtils" />
+            type="com.cloudcreativity.intellijworker.utils.AuthDialogUtils" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"

@@ -9,9 +9,15 @@
     <color name="gray_515151">#515151</color>
     <color name="gray_717171">#717171</color>
     <color name="gray_919191">#919191</color>
+    <color name="gray_a1a1a1">#a1a1a1</color>
     <color name="gray_d1d1d1">#d1d1d1</color>
     <color name="gray_f1f1f1">#f1f1f1</color>
     <color name="transparent">#00ffffff</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <!--下拉刷新的颜色-->
+    <color name="refresh_red">#ef4436</color>
+    <color name="refresh_blue">#00aaf6</color>
+    <color name="refresh_green">#32bc50</color>
 </resources>

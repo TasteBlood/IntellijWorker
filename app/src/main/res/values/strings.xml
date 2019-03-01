@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">民情通</string>
+    <string name="app_name">智慧民工</string>
     <string name="open">打开</string>
     <string name="close">关闭</string>
     <string name="str_login_or_register">登录/注册</string>
@@ -30,4 +30,21 @@
     <string name="str_agree">同意</string>
     <string name="str_reset_pwd">重置密码</string>
     <string name="str_submit">提交</string>
+    <string name="str_version0">V1.0</string>
+    <string name="str_input_idcard">请输入身份证号</string>
+    <string name="str_saraly">工资记录</string>
+    <string name="ic_work">出勤记录</string>
+    <string name="str_state_coming">进行中</string>
+    <string name="str_state_finish">已完工</string>
+    <string name="str_pro_state">工程状态:</string>
+    <string name="str_pro_worktype">担任工种:</string>
+    <string name="str_to">至</string>
+    <string name="str_pro_time">工程周期:</string>
+    <string name="str_pro_name">工程名称:</string>
+    <string name="str_edit_pwd">修改密码</string>
+    <string name="str_work">已出勤</string>
+    <string name="str_no_work">未出勤</string>
+
+    <string name="str_state_send">已发放</string>
+    <string name="str_state_no_send">未发放</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cloudcreativity.peoplepass">
+    package="com.cloudcreativity.intellijworker">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,7 +26,7 @@
             android:value="GlideModule" />
         -->
         <meta-data
-            android:name="com.cloudcreativity.peoplepass.utils.GlideModuleConfig"
+            android:name="com.cloudcreativity.intellijworker.utils.GlideModuleConfig"
             android:value="GlideModule" />
         <!-- Glide配置结束 -->
 
@@ -55,6 +55,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".loginAndRegister.RegisterActivity" android:screenOrientation="portrait"/>
         <activity android:name=".loginAndRegister.ForgetPwdActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".loginAndRegister.EditPwdActivity" />
+        <activity android:name=".main.WorkNotesActivity" />
+        <activity android:name=".main.SalaryActivity" />
 
 
         <!-- Activity配置结束 -->
@@ -63,7 +66,7 @@
         <!-- File provider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.cloudcreativity.wankeshop.provider"
+            android:authorities="com.cloudcreativity.intellijworker.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
