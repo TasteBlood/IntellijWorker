@@ -31,13 +31,15 @@ public class LoggingInterceptor implements Interceptor {
                     //重新添加参数
                     builder.addEncoded(body.encodedName(i), body.encodedValue(i));
                 }
-                if(!request.url().toString().contains("login"))
+                if(!request.url().toString().contains("login")){
                     builder.addEncoded("token",SPUtils.get().getToken())
                             .addEncoded("wid",String.valueOf(SPUtils.get().getUid()))
-                            .addEncoded("idCardNum",SPUtils.get().getString(SPUtils.Config.IDCARD,""));
-                sb.append("token" + "=" + SPUtils.get().getToken() + ",");
-                sb.append("wid" + "=" + SPUtils.get().getUid() + ",");
-                sb.append("idCardNum" + "=" + SPUtils.get().getString(SPUtils.Config.IDCARD,"") + ",");
+                            .addEncoded("idCardNumber",SPUtils.get().getString(SPUtils.Config.IDCARD,""));
+                    sb.append("token" + "=" + SPUtils.get().getToken() + ",");
+                    sb.append("wid" + "=" + SPUtils.get().getUid() + ",");
+                    sb.append("idCardNumber" + "=" + SPUtils.get().getString(SPUtils.Config.IDCARD,"") + ",");
+                }
+
                 body = builder.build();
                 // body = builder.build();
                 sb.delete(sb.length() - 1, sb.length());
@@ -45,12 +47,18 @@ public class LoggingInterceptor implements Interceptor {
                 request = request.newBuilder().post(body).build();
             }
         }else if("GET".equals(method)){
-            HttpUrl httpUrl = request.url().newBuilder()
-                    .addQueryParameter("token", SPUtils.get().getToken())
-                    .addQueryParameter("wid", String.valueOf(SPUtils.get().getUid()))
-                    .addQueryParameter("idCardNum",SPUtils.get().getString(SPUtils.Config.IDCARD,""))
-                    .build();
-            request = request.newBuilder().url(httpUrl).build();
+            if(!request.url().toString().contains("login")&&!request.url().toString().contains("addFace")){
+                HttpUrl httpUrl = request.url().newBuilder()
+                        .addQueryParameter("token", SPUtils.get().getToken())
+                        .addQueryParameter("wid", String.valueOf(SPUtils.get().getUid()))
+                        .addQueryParameter("idCardNumber",SPUtils.get().getString(SPUtils.Config.IDCARD,""))
+                        .build();
+                request = request.newBuilder().url(httpUrl).build();
+            }else{
+                HttpUrl httpUrl = request.url().newBuilder()
+                        .build();
+                request = request.newBuilder().url(httpUrl).build();
+            }
         }
         LogUtils.e(TAG,"\n");
         LogUtils.e(TAG,"----------Start----------------");

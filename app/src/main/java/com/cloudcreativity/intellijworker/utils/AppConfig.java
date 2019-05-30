@@ -19,11 +19,16 @@ public class AppConfig {
     /**
      * 这是SharePreference的名称
      */
-    public static final String SP_NAME = "people_pass_app_config";
+    public static final String SP_NAME = "intellij_worker_config";
 
     /**
      * 这是统一的文件名
      */
-    public static String FILE_NAME = "people_pass_image_%d.%s";
+    public static String FILE_NAME = "intellij_worker_image_%d.%s";
+
+    /**
+     * 这是APP热更新的下载缓存文件名
+     */
+    static String APP_HOT_UPDATE_FILE = "intellij_worker_hot_update.apk";
 
 }

@@ -85,7 +85,7 @@ public class SalaryModel {
 
     private void loadData(final int page){
         HttpUtils.getInstance()
-                .getSalary(projectEntity.getProjectDomain().getPid(),projectEntity.getWid(),page)
+                .getSalary(projectEntity.getwId(),page,10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<String>(baseDialog,false) {

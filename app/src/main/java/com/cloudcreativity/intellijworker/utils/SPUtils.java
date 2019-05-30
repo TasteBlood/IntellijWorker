@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.cloudcreativity.intellijworker.base.BaseApp;
+import com.cloudcreativity.intellijworker.entity.UserEntity;
+import com.google.gson.Gson;
 
 /**
  * 这是SharePreferences工具
  */
 public class SPUtils {
-
-
 
     public interface Config{
         String IS_LOGIN = "app_is_login";
@@ -68,5 +68,10 @@ public class SPUtils {
 
     public int getUid() {
         return preferences.getInt(Config.UID,0);
+    }
+
+    public String getIdCard(){return preferences.getString(Config.IDCARD,"");}
+    public UserEntity getUser() {
+        return new Gson().fromJson(preferences.getString(Config.USER,"{}"),UserEntity.class);
     }
 }

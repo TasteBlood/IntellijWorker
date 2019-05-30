@@ -1,1 +1,1 @@
-include ':app', ':calendarview'
+include ':app', ':calendarview', ':faceplatform-ui', ':faceplatform', ':recorder', ':imageselector'

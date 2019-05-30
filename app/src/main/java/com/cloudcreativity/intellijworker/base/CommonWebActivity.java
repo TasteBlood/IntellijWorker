@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,15 @@ public class CommonWebActivity extends AppCompatActivity implements View.OnClick
         TextView tv_title = findViewById(R.id.tv_title);
         String title = getIntent().getStringExtra("title");
         String url = getIntent().getStringExtra("url");
+        String data = getIntent().getStringExtra("data");
         tv_title.setText(title);
         initWebView();
-        webView.loadUrl(url);
+        if(!TextUtils.isEmpty(url)){
+            webView.loadUrl(url);
+        }else{
+            webView.loadData("<p style='font-size:40px;line-height:45px;margin:10px'>"+data+"</p>","text/html;charset=utf-8","UTF-8");
+        }
+
     }
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
@@ -147,6 +154,13 @@ public class CommonWebActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(context,CommonWebActivity.class);
         intent.putExtra("title",title);
         intent.putExtra("url",url);
+        context.startActivity(intent);
+    }
+
+    public static void startActivityByData(Context context ,String title, String data) {
+        Intent intent = new Intent(context,CommonWebActivity.class);
+        intent.putExtra("title",title);
+        intent.putExtra("data",data);
         context.startActivity(intent);
     }
 

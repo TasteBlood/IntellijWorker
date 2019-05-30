@@ -1,26 +1,18 @@
 package com.cloudcreativity.intellijworker.main;
 
-import android.content.Intent;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
-import android.widget.TextView;
-
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.cloudcreativity.intellijworker.R;
 import com.cloudcreativity.intellijworker.base.BaseBindingRecyclerViewAdapter;
 import com.cloudcreativity.intellijworker.databinding.ActivityMainBinding;
 import com.cloudcreativity.intellijworker.databinding.LayoutItemMainProBinding;
 import com.cloudcreativity.intellijworker.entity.BaseResult;
-import com.cloudcreativity.intellijworker.entity.UserEntity;
 import com.cloudcreativity.intellijworker.entity.UserProjectEntity;
 import com.cloudcreativity.intellijworker.utils.DefaultObserver;
 import com.cloudcreativity.intellijworker.utils.HttpUtils;
-import com.cloudcreativity.intellijworker.utils.SPUtils;
 import com.cloudcreativity.intellijworker.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -38,60 +30,71 @@ public class MainModel {
     MainModel(final ActivityMainBinding binding, MainActivity context) {
         this.binding = binding;
         this.context = context;
-        binding.rcvMain.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-        binding.refreshMain.setOnRefreshListener(new RefreshListenerAdapter() {
-            @Override
-            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                currentPage = 1;
-                loadData(currentPage);
-            }
 
-            @Override
-            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
-                loadData(currentPage);
-            }
-        });
+        binding.navMain.setMode(BottomNavigationBar.MODE_FIXED);
+        binding.navMain.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+        //binding.navMain.setBarBackgroundColor(R.color.gray_f1f1f1);
 
-        adapter = new BaseBindingRecyclerViewAdapter<UserProjectEntity, LayoutItemMainProBinding>(context) {
-            @Override
-            protected int getLayoutResId(int viewType) {
-                return R.layout.layout_item_main_pro;
-            }
+        binding.navMain.addItem(new BottomNavigationItem(R.mipmap.home,"首页")).setActiveColor(R.color.colorPrimary).setInActiveColor(R.color.gray_717171);
+        binding.navMain.addItem(new BottomNavigationItem(R.mipmap.history,"经历")).setActiveColor(R.color.colorPrimary).setInActiveColor(R.color.gray_717171);
+        binding.navMain.addItem(new BottomNavigationItem(R.mipmap.mine,"我的")).setActiveColor(R.color.colorPrimary).setInActiveColor(R.color.gray_717171);
 
-            @Override
-            protected void onBindItem(LayoutItemMainProBinding binding, final UserProjectEntity item, int position) {
-                binding.setItem(item);
-                binding.tvWork.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context,WorkNotesActivity.class);
-                        intent.putExtra("proEntity",item.getProjectDomain());
-                        context.startActivity(intent);
-                    }
-                });
-                binding.tvSalary.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context,SalaryActivity.class);
-                        intent.putExtra("proEntity",item);
-                        context.startActivity(intent);
-                    }
-                });
-            }
-        };
+        binding.navMain.initialise();
 
-        binding.refreshMain.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.refreshMain.startRefresh();
-            }
-        },200);
-
-        View headerView = binding.nvMain.getHeaderView(0);
-        TextView tvName = headerView.findViewById(R.id.tv_name);
-        String string = SPUtils.get().getString(SPUtils.Config.USER, "{}");
-        UserEntity userEntity = new Gson().fromJson(string, UserEntity.class);
-        tvName.setText(userEntity.getWorkerName());
+//        binding.rcvMain.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+//        binding.refreshMain.setOnRefreshListener(new RefreshListenerAdapter() {
+//            @Override
+//            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+//                currentPage = 1;
+//                loadData(currentPage);
+//            }
+//
+//            @Override
+//            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
+//                loadData(currentPage);
+//            }
+//        });
+//
+//        adapter = new BaseBindingRecyclerViewAdapter<UserProjectEntity, LayoutItemMainProBinding>(context) {
+//            @Override
+//            protected int getLayoutResId(int viewType) {
+//                return R.layout.layout_item_main_pro;
+//            }
+//
+//            @Override
+//            protected void onBindItem(LayoutItemMainProBinding binding, final UserProjectEntity item, int position) {
+//                binding.setItem(item);
+//                binding.tvWork.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(context,WorkNotesActivity.class);
+//                        intent.putExtra("proEntity",item.getProjectDomain());
+//                        context.startActivity(intent);
+//                    }
+//                });
+//                binding.tvSalary.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(context,SalaryActivity.class);
+//                        intent.putExtra("proEntity",item);
+//                        context.startActivity(intent);
+//                    }
+//                });
+//            }
+//        };
+//
+//        binding.refreshMain.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.refreshMain.startRefresh();
+//            }
+//        },200);
+//
+//        View headerView = binding.nvMain.getHeaderView(0);
+//        TextView tvName = headerView.findViewById(R.id.tv_name);
+//        String string = SPUtils.get().getString(SPUtils.Config.USER, "{}");
+//        UserEntity userEntity = new Gson().fromJson(string, UserEntity.class);
+//        tvName.setText(userEntity.getWorkerName());
     }
 
     private void loadData(final int page){
@@ -107,10 +110,10 @@ public class MainModel {
                             }.getType();
                             List<UserProjectEntity> entities = new Gson().fromJson(new Gson().toJson(result.getData()), type);
                             if(page==1){
-                                binding.refreshMain.finishRefreshing();
+                                //binding.refreshMain.finishRefreshing();
                                 adapter.getItems().clear();
                             }else{
-                                binding.refreshMain.finishLoadmore();
+                               // binding.refreshMain.finishLoadmore();
                             }
                             adapter.getItems().addAll(entities);
                             currentPage ++;
@@ -124,9 +127,9 @@ public class MainModel {
                     @Override
                     public void onFail(ExceptionReason msg) {
                         if(page==1){
-                            binding.refreshMain.finishRefreshing();
+                            //binding.refreshMain.finishRefreshing();
                         }else{
-                            binding.refreshMain.finishLoadmore();
+                            //binding.refreshMain.finishLoadmore();
                         }
                     }
                 });

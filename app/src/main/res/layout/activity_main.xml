@@ -1,53 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="mainModal"
             type="com.cloudcreativity.intellijworker.main.MainModel" />
     </data>
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/dwl_main"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".main.MainActivity">
-        <!--main content-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tlb_main"
-                android:background="@color/colorPrimary"
-                app:titleTextColor="@android:color/white"
-                app:navigationIcon="@drawable/ic_format_list_bulleted_white_24dp"
-                android:elevation="3dip"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
-            <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-                android:id="@+id/refreshMain"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:tr_head_height="50dip">
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rcv_main"
-                    android:adapter="@{mainModal.adapter}"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
-        </LinearLayout>
-        <!--slide menu-->
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nv_main"
-            android:layout_gravity="start"
-            app:menu="@menu/menu"
-            app:headerLayout="@layout/layout_main_drawerlayout_top"
-            app:itemTextColor="@color/gray_313131"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+   <android.support.v7.widget.LinearLayoutCompat
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <FrameLayout
+           android:id="@+id/frameMain"
+           android:layout_width="match_parent"
+           android:layout_height="0dip"
+           android:layout_weight="1">
 
-    </android.support.v4.widget.DrawerLayout>
+       </FrameLayout>
+       <com.ashokvarma.bottomnavigation.BottomNavigationBar
+           android:id="@+id/navMain"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="bottom" />
+   </android.support.v7.widget.LinearLayoutCompat>
 </layout>
 

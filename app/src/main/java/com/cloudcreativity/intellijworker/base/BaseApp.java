@@ -15,9 +15,11 @@ public class BaseApp extends Application {
 
     public static BaseApp app;
     private List<Activity> activities = new ArrayList<>();
+
     public void addActivity(Activity activity){
         this.activities.add(activity);
     }
+    public void removeActivity(Activity activity){this.activities.remove(activity);}
 
     @Override
     public void onCreate() {

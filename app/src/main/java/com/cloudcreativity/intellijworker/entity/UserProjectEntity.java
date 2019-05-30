@@ -3,52 +3,38 @@ package com.cloudcreativity.intellijworker.entity;
 import java.io.Serializable;
 
 public class UserProjectEntity implements Serializable {
-    private String logid;
-    private int lstate;
-    private int wid;
-    private int did;
     private int pid;
-    private int workerType;
-    private String workerTypeName;
-    private String workerSalary;
-    private String contract;
-    private String cardNum;
-    private String workerNum;
-    private int warnState;
-    private String deptName;
-    private String projectName;
-    private ProjectEntity projectDomain;
+    private int wId;
+    private String projectCode;
+    private String profession;
+    private String name;
+    private String proStatus;
+    private String contractorCorpName;
+    private String startDate;
+    private String completeDate;
 
-    public String getLogid() {
-        return logid;
+    public int getwId() {
+        return wId;
     }
 
-    public void setLogid(String logid) {
-        this.logid = logid;
+    public void setwId(int wId) {
+        this.wId = wId;
     }
 
-    public int getLstate() {
-        return lstate;
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setLstate(int lstate) {
-        this.lstate = lstate;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
-    public int getWid() {
-        return wid;
+    public String getProStatus() {
+        return proStatus;
     }
 
-    public void setWid(int wid) {
-        this.wid = wid;
-    }
-
-    public int getDid() {
-        return did;
-    }
-
-    public void setDid(int did) {
-        this.did = did;
+    public void setProStatus(String proStatus) {
+        this.proStatus = proStatus;
     }
 
     public int getPid() {
@@ -59,83 +45,43 @@ public class UserProjectEntity implements Serializable {
         this.pid = pid;
     }
 
-    public int getWorkerType() {
-        return workerType;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setWorkerType(int workerType) {
-        this.workerType = workerType;
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
-    public String getWorkerTypeName() {
-        return workerTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setWorkerTypeName(String workerTypeName) {
-        this.workerTypeName = workerTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getWorkerSalary() {
-        return workerSalary;
+    public String getContractorCorpName() {
+        return contractorCorpName;
     }
 
-    public void setWorkerSalary(String workerSalary) {
-        this.workerSalary = workerSalary;
+    public void setContractorCorpName(String contractorCorpName) {
+        this.contractorCorpName = contractorCorpName;
     }
 
-    public String getContract() {
-        return contract;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getCardNum() {
-        return cardNum;
+    public String getCompleteDate() {
+        return completeDate;
     }
 
-    public void setCardNum(String cardNum) {
-        this.cardNum = cardNum;
-    }
-
-    public String getWorkerNum() {
-        return workerNum;
-    }
-
-    public void setWorkerNum(String workerNum) {
-        this.workerNum = workerNum;
-    }
-
-    public int getWarnState() {
-        return warnState;
-    }
-
-    public void setWarnState(int warnState) {
-        this.warnState = warnState;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public ProjectEntity getProjectDomain() {
-        return projectDomain;
-    }
-
-    public void setProjectDomain(ProjectEntity projectDomain) {
-        this.projectDomain = projectDomain;
+    public void setCompleteDate(String completeDate) {
+        this.completeDate = completeDate;
     }
 }

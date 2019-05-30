@@ -50,13 +50,13 @@ public class LoginModel {
                     @Override
                     public void onSuccess(String t) {
                         UserEntity entity = new Gson().fromJson(t, UserEntity.class);
-                        if(entity!=null&&entity.getWid()!=0){
+                        if(entity!=null&&entity.getId()!=0){
                             //保存当前的信息
-                            SPUtils.get().putInt(SPUtils.Config.UID,entity.getWid());
+                            SPUtils.get().putInt(SPUtils.Config.UID,entity.getWorkerDomain().getId());
                             SPUtils.get().putString(SPUtils.Config.TOKEN,entity.getToken());
                             SPUtils.get().putBoolean(SPUtils.Config.IS_LOGIN,true);
                             SPUtils.get().putString(SPUtils.Config.USER,new Gson().toJson(entity));
-                            SPUtils.get().putString(SPUtils.Config.IDCARD,entity.getIdCardNum());
+                            SPUtils.get().putString(SPUtils.Config.IDCARD,entity.getIdCardNumber());
                             context.startActivity(new Intent().setClass(context, MainActivity.class));
                         }else{
                             ToastUtils.showShortToast(context,"登录失败");
