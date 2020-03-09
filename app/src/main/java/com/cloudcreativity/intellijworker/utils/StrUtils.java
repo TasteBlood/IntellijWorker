@@ -1,8 +1,11 @@
 package com.cloudcreativity.intellijworker.utils;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -125,5 +128,28 @@ public class StrUtils {
      */
     public static String formatNumberByThousands(int number) {
         return number>=9999?"10000+":String.valueOf(number);
+    }
+
+    public static String md5(String text){
+        if (TextUtils.isEmpty(text)) {
+            return "";
+        }
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest(text.getBytes());
+            StringBuilder result = new StringBuilder();
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result.append(temp);
+            }
+            return result.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

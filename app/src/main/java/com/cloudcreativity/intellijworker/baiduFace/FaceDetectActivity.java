@@ -2,7 +2,6 @@ package com.cloudcreativity.intellijworker.baiduFace;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.baidu.idl.face.platform.FaceConfig;
 import com.baidu.idl.face.platform.FaceEnvironment;

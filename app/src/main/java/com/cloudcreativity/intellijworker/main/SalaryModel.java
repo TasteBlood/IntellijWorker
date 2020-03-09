@@ -3,20 +3,16 @@ package com.cloudcreativity.intellijworker.main;
 import android.app.Activity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.cloudcreativity.intellijworker.R;
 import com.cloudcreativity.intellijworker.base.BaseBindingRecyclerViewAdapter;
 import com.cloudcreativity.intellijworker.base.BaseDialogImpl;
 import com.cloudcreativity.intellijworker.databinding.ActivitySalaryBinding;
 import com.cloudcreativity.intellijworker.databinding.LayoutItemSalaryBinding;
-import com.cloudcreativity.intellijworker.entity.BaseResult;
-import com.cloudcreativity.intellijworker.entity.ProjectEntity;
 import com.cloudcreativity.intellijworker.entity.SalaryEntity;
 import com.cloudcreativity.intellijworker.entity.UserProjectEntity;
 import com.cloudcreativity.intellijworker.utils.DefaultObserver;
 import com.cloudcreativity.intellijworker.utils.HttpUtils;
-import com.cloudcreativity.intellijworker.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -44,8 +40,8 @@ public class SalaryModel {
         this.projectEntity = projectEntity;
         this.binding = binding;
 
-        this.binding.rcvSalary.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(context,DividerItemDecoration.VERTICAL);
+        this.binding.rcvSalary.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(context.getResources().getDrawable(R.drawable.divider_line_5dp_transparent));
         this.binding.rcvSalary.addItemDecoration(itemDecoration);
 
@@ -79,43 +75,54 @@ public class SalaryModel {
             public void run() {
                 binding.refreshSalary.startRefresh();
             }
-        },200);
+        }, 200);
 
     }
 
-    private void loadData(final int page){
+    private void loadData(final int page) {
         HttpUtils.getInstance()
-                .getSalary(projectEntity.getwId(),page,10)
+                .getSalary(projectEntity.getwId(), page, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<String>(baseDialog,false) {
+                .subscribe(new DefaultObserver<String>(baseDialog, false) {
                     @Override
                     public void onSuccess(String t) {
-                        BaseResult result = new Gson().fromJson(t, BaseResult.class);
-                        if(result.getTotalData()>0){
-                            Type type = new TypeToken<List<SalaryEntity>>() {
-                            }.getType();
-                            List<SalaryEntity> entities = new Gson().fromJson(new Gson().toJson(result.getData()), type);
-                            if(page==1){
+//                        if("[]".equals(t)){
+//                            baseDialog.showRequestErrorMessage("暂无数据");
+//                            if(page==1){
+//                                binding.refreshSalary.finishRefreshing();
+//                            }else{
+//                                binding.refreshSalary.finishLoadmore();
+//                            }
+//                            return;
+//                        }
+                        Type type = new TypeToken<List<SalaryEntity>>() {
+                        }.getType();
+                        List<SalaryEntity> entities = new Gson().fromJson(t, type);
+                        if (entities != null && !entities.isEmpty()) {
+                            if (page == 1) {
                                 binding.refreshSalary.finishRefreshing();
                                 adapter.getItems().clear();
-                            }else{
+                            } else {
                                 binding.refreshSalary.finishLoadmore();
                             }
                             adapter.getItems().addAll(entities);
-                            pageNum ++;
-                        }else{
-                            if(page<=1){
-                                ToastUtils.showShortToast(context,"暂无工资数据");
+                            pageNum++;
+                        } else {
+                            if (page == 1) {
+                                binding.refreshSalary.finishRefreshing();
+                                adapter.getItems().clear();
+                            } else {
+                                binding.refreshSalary.finishLoadmore();
                             }
                         }
                     }
 
                     @Override
                     public void onFail(ExceptionReason msg) {
-                        if(page==1){
+                        if (page == 1) {
                             binding.refreshSalary.finishRefreshing();
-                        }else{
+                        } else {
                             binding.refreshSalary.finishLoadmore();
                         }
                     }

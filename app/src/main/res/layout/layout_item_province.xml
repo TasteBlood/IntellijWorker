@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.cloudcreativity.intellijworker.entity.address.ProvinceEntity" />
+    </data>
+    <LinearLayout
+        android:id="@+id/layoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@{item.isCheck?@color/gray_f1f1f1:@color/white}"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="10dip">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@{item.isCheck?@dimen/sp16:@dimen/sp14}"
+            android:textColor="@{item.isCheck?@color/colorPrimary:@color/gray_717171}"
+            android:text="@{item.name}"/>
+    </LinearLayout>
+</layout>

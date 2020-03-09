@@ -2,10 +2,8 @@ package com.cloudcreativity.intellijworker.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 
 import com.cloudcreativity.intellijworker.R;
 import com.cloudcreativity.intellijworker.loginAndRegister.LoginActivity;
@@ -23,35 +21,22 @@ public class IndexActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_index);
 
-        View index = findViewById(R.id.iv_index);
-        Animation animation = new ScaleAnimation(1.0f, 1.0f, 1.0f, 1.0f,
-                ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(2500);
-        animation.setFillAfter(true);
-        animation.setAnimationListener(new Animation.AnimationListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                if (SPUtils.get().isLogin()) {
-                    //跳转到主页
-                    startActivity(new Intent().setClass(IndexActivity.this, MainActivity.class));
-                } else {
-                    //跳转到登录
-                    startActivity(new Intent().setClass(IndexActivity.this, LoginActivity.class));
+            public void run() {
+                if(SPUtils.get().isFirst()){
+                    startActivity(new Intent().setClass(IndexActivity.this, ActivityIntroduce.class));
+                }else{
+                    if (SPUtils.get().isLogin()) {
+                        //跳转到主页
+                        startActivity(new Intent().setClass(IndexActivity.this, MainActivity.class));
+                    } else {
+                        //跳转到登录
+                        startActivity(new Intent().setClass(IndexActivity.this, LoginActivity.class));
+                    }
                 }
-
                 onBackPressed();
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        index.startAnimation(animation);
+        },3000);
     }
 }

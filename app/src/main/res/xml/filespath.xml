@@ -8,4 +8,7 @@
         name="cache2"
         path="cache" />
     <external-cache-path name="cache3" path="/"/>
+    <external-path
+        name="DCIM"
+        path="DCIM" />
 </paths>

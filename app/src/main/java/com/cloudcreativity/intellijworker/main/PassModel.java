@@ -102,7 +102,7 @@ public class PassModel {
         HttpUtils.getInstance().getQiNiuToken()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<String>(baseDialog,true) {
+                .subscribe(new DefaultObserver<String>(baseDialog,false) {
                     @Override
                     public void onSuccess(String t) {
                         qiNiuToken = t;

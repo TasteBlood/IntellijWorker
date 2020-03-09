@@ -93,6 +93,11 @@
 -keep class sun.misc.Unsafe { *; }
 #-keep class com.google.gson.stream.** { *; }
 -keep class com.google.gson.**{*;}
+
+# -百度ai的东西不能混淆- #
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**
 ##---------------End: proguard configuration for Gson  ----------
 
 

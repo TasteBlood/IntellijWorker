@@ -46,7 +46,7 @@ public class ForgetPwdModel {
         binding.tilPwd2.setError(null);
 
         HttpUtils.getInstance()
-                .editPwd(pwd1.get(),pwd2.get())
+                .editPwd(StrUtils.md5(pwd1.get()),StrUtils.md5(pwd2.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<String>(baseDialog,true) {

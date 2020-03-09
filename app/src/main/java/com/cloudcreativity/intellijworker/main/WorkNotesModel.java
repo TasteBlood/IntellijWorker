@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.cloudcreativity.intellijworker.R;
@@ -107,6 +108,12 @@ public class WorkNotesModel {
         };
 
         try {
+            if(TextUtils.isEmpty(entity.getStartDate())||TextUtils.isEmpty(entity.getCompleteDate())){
+                ToastUtils.showShortToast(context,"开工或完工日期不能为空");
+                context.finish();
+                return;
+            }
+
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
             start = Calendar.getInstance();
             start.setTime(format.parse(entity.getStartDate()));

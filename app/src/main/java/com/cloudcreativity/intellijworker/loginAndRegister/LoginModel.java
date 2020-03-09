@@ -11,6 +11,7 @@ import com.cloudcreativity.intellijworker.main.MainActivity;
 import com.cloudcreativity.intellijworker.utils.DefaultObserver;
 import com.cloudcreativity.intellijworker.utils.HttpUtils;
 import com.cloudcreativity.intellijworker.utils.SPUtils;
+import com.cloudcreativity.intellijworker.utils.StrUtils;
 import com.cloudcreativity.intellijworker.utils.ToastUtils;
 import com.google.gson.Gson;
 
@@ -30,6 +31,10 @@ public class LoginModel {
         this.baseDialog = context;
     }
 
+    public void onBack(){
+        context.finish();
+    }
+
     /**
      * 登录按钮点击
      */
@@ -43,7 +48,7 @@ public class LoginModel {
             ToastUtils.showShortToast(context,"密码不能为空");
             return;
         }
-        HttpUtils.getInstance().login(phone.get(),pwd.get())
+        HttpUtils.getInstance().login(phone.get(), StrUtils.md5(pwd.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<String>(baseDialog,true) {
@@ -57,6 +62,7 @@ public class LoginModel {
                             SPUtils.get().putBoolean(SPUtils.Config.IS_LOGIN,true);
                             SPUtils.get().putString(SPUtils.Config.USER,new Gson().toJson(entity));
                             SPUtils.get().putString(SPUtils.Config.IDCARD,entity.getIdCardNumber());
+                            context.finish();
                             context.startActivity(new Intent().setClass(context, MainActivity.class));
                         }else{
                             ToastUtils.showShortToast(context,"登录失败");

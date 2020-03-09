@@ -1,8 +1,14 @@
 package com.cloudcreativity.intellijworker.utils;
 
 import android.text.TextUtils;
+import android.widget.Toast;
 
+import com.cloudcreativity.intellijworker.base.BaseApp;
 import com.cloudcreativity.intellijworker.base.BaseDialogImpl;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -64,15 +70,15 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                 JSONObject object = new JSONObject((String)t);
                 if(object.getInt("status")==1){
                     //成功
-                    if(TextUtils.isEmpty(object.getString("info"))){
+                    if(TextUtils.isEmpty(object.getString("info"))||object.isNull("info")){
                         //说明当前的字符串是空的,模拟出空的json串
-                        onSuccess("{}");
+                        onSuccess(new Gson().toJson(new JsonArray()));
                     }else{
                         try{
                             JSONObject info = object.getJSONObject("info");
                             onSuccess(info.toString());
                         }catch (JSONException e){
-                            //说明info不是json对象
+                            //说明info不是json对象,就不需要获取了
                             onSuccess(object.getString("info"));
                         }
                     }
@@ -84,12 +90,23 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                     SPUtils.get().putString(SPUtils.Config.TOKEN,null);
                     onFail(ExceptionReason.PARAMS_ERROR);
                     impl.showUserAuthOutDialog();
-                }else{
+                }else if(object.getInt("status")==500){
                     //失败
-                    if(!object.has("info")||TextUtils.isEmpty(object.getString("info"))){
+                    if(object.isNull("info")){
                         impl.showRequestErrorMessage("请求失败");
                     }else{
-                        impl.showRequestErrorMessage(object.getString("info"));
+                        //impl.showRequestErrorMessage(object.getString("info"));
+                        String info = object.getString("info");
+                        Toast.makeText(BaseApp.app,info,Toast.LENGTH_SHORT).show();
+                    }
+                    onFail(ExceptionReason.PARAMS_ERROR);
+                }else{
+                    //失败
+                    if(object.isNull("info")){
+                        impl.showRequestErrorMessage("请求失败");
+                    }else{
+                        String info = object.getString("info");
+                        Toast.makeText(BaseApp.app,info,Toast.LENGTH_SHORT).show();
                     }
                     onFail(ExceptionReason.PARAMS_ERROR);
                 }
@@ -99,7 +116,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
             }
         }else{
             //烂逼接口，数据无法用框架解析，需要进行自己解析
-            onSuccess("{}");
+            onSuccess(new Gson().toJson(new JsonObject()));
         }
     }
     public abstract void onSuccess(String t);

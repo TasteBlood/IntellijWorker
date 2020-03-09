@@ -18,6 +18,7 @@ public class SPUtils {
         String TOKEN = "app_request_token";
         String USER = "app_login_user";
         String IDCARD = "app_id_card";
+        String IS_FIRST = "is_first";
     }
 
     private static SharedPreferences preferences;
@@ -60,6 +61,13 @@ public class SPUtils {
 
     public boolean isLogin(){
         return preferences.getBoolean(Config.IS_LOGIN,false);
+    }
+
+    public boolean isFirst(){
+        return preferences.getBoolean(Config.IS_FIRST,true);
+    }
+    public void setIsFirst(boolean isFirst){
+        preferences.edit().putBoolean(Config.IS_FIRST,isFirst).apply();
     }
 
     public String getToken() {

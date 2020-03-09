@@ -1,33 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
             name="loginModel"
             type="com.cloudcreativity.intellijworker.loginAndRegister.LoginModel" />
     </data>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/bg"
+        android:background="@color/white"
         android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:background="@color/colorPrimary"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->loginModel.onBack()}"
+                android:layout_marginStart="10dip"
+                android:layout_marginTop="10dip"
+                android:src="@drawable/ic_arrow_back_white_24dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="15dip"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="20dip"
+                android:text="嗨，您好\n欢迎使用建筑工地民工信息查询平台"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </FrameLayout>
         <LinearLayout
             android:orientation="vertical"
             android:id="@+id/login_content"
+            android:layout_marginTop="20dip"
             android:padding="20dip"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dip"
+            android:layout_weight="3">
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="10dip"
+                android:textSize="16sp"
+                android:text="-账号登录-"/>
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dip"
-                android:textColor="@color/white"
-                android:textColorHint="@color/gray_f1f1f1"
+                android:textColor="@color/gray_414141"
+                android:textColorHint="@color/gray_919191"
                 android:inputType="text"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:drawablePadding="10dip"
+                android:drawableStart="@drawable/ic_person_blue_24dp"
                 android:text="@={loginModel.phone}"
                 android:background="@drawable/ic_bottom_line_1px_white"
                 android:hint="@string/str_input_idcard"/>
@@ -36,11 +70,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dip"
-                android:layout_marginTop="10dip"
-                android:textColor="@color/white"
+                android:layout_marginTop="20dip"
+                android:textColor="@color/gray_414141"
+                android:drawablePadding="10dip"
+                android:maxLines="1"
+                android:drawableStart="@drawable/ic_lock_outline_black_24dp"
+                android:gravity="center_vertical"
                 android:inputType="textPassword"
                 android:text="@={loginModel.pwd}"
-                android:textColorHint="@color/gray_f1f1f1"
+                android:textColorHint="@color/gray_919191"
                 android:background="@drawable/ic_bottom_line_1px_white"
                 android:hint="@string/str_input_password"/>
             <android.support.v7.widget.AppCompatButton
@@ -50,9 +88,8 @@
                 android:text="@string/str_login"
                 android:textColor="@color/white"
                 android:onClick="@{(view)->loginModel.onLoginClick()}"
-                android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

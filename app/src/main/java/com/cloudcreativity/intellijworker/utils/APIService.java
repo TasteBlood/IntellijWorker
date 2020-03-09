@@ -18,8 +18,9 @@ public interface APIService {
     /**
      * 整体的接口配置
      */
-    String TEST_HOST = "http://192.168.31.124:8088/";
-    String ONLINE_HOST = "http://service.milidianshang.cn/";
+    String TEST_HOST = "http://192.168.31.51:9999/";
+//    String TEST_HOST = "http://service.zhiyingtec.com/";
+    String ONLINE_HOST = "http://service.zhiyingtec.com/";
     String HOST = AppConfig.DEBUG ? TEST_HOST : ONLINE_HOST;
     String HOST_APP = AppConfig.DEBUG ? TEST_HOST : ONLINE_HOST;
 
@@ -66,7 +67,7 @@ public interface APIService {
                                  @Field("pageNum") int page,
                                  @Field("pageSize") int size);
 
-    @GET("test")
+    @GET("/app/version/find")
     Observable<String> getLastVersion();
 
     /**

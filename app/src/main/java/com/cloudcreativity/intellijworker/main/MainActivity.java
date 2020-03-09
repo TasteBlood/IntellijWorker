@@ -15,6 +15,7 @@ import com.cloudcreativity.intellijworker.fragments.HomeFragment;
 import com.cloudcreativity.intellijworker.fragments.MineFragment;
 import com.cloudcreativity.intellijworker.fragments.WorkFragment;
 import com.cloudcreativity.intellijworker.receiver.MyBusinessReceiver;
+import com.cloudcreativity.intellijworker.utils.UpdateManager;
 
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener{
@@ -51,6 +52,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
 
         init();
+
+        //开始检测版本
+        UpdateManager.checkVersion(this,this);
     }
 
     //initial display
